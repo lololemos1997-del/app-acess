@@ -27,7 +27,7 @@ if ticker_input:
         # Busca dados do Yahoo Finance (garantindo histórico suficiente para cálculos)
         acao = yf.Ticker(ticker_input)
         info = acao.info
-        hist = acao.history(periodo="1y")
+        hist = acao.history(period="1y") # Corrigido de periodo para period
         
         if not hist.empty and len(hist) > 30:
             # Extração de informações básicas
@@ -177,7 +177,7 @@ if ticker_input:
 
             # Gráficos e Médias
             st.subheader(f"Gráfico de Preços e Médias Móveis ({periodo})")
-            hist_periodo = acao.history(periodo=periodo)
+            hist_periodo = acao.history(period=periodo) # Corrigido de periodo para period
             if not hist_periodo.empty:
                 hist_periodo['MMA21'] = hist_periodo['Close'].rolling(window=21).mean()
                 st.line_chart(hist_periodo[["Close", "MMA21"]])
